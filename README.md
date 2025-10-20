@@ -19,3 +19,21 @@ We’d also like you to add some unit tests to the ClearBank.DeveloperTest.Tests
 You are free to use any frameworks/NuGet packages that you see fit.  
  
 You should plan to spend around 1 to 3 hours to complete the exercise.
+
+## Changes I've made
+- SOLID principles implementation
+  - Make `PaymentService.MakePayment()` method be single responsibility - by moving other logics into separate methods/classes
+  - Decouple data store reponsibilities and payment validation from `MakePayment` method
+  - Dependency injection on constructor to remove direct instantiation
+- Remove data store creation duplication
+- Uses IOption pattern with DI for configuration manager dependency
+- Factory pattern implementation on datastore and payment validator
+- Improved error handling by introducing `ErrorMessage` in `MakePaymentResult` and trycatch if update account fails
+- Introduce simpler Result pattern on `MakePayment` method and early returns for error cases.
+- Introduce `DataStoreType` enum to remove  magic string
+ 
+## Improvement
+- Implement proper Result<T> pattern on `MakePayment` method.
+- Better error handling on paymentvalidator result as it does not explain the reason for failure.
+- Introduce result pattern to payment validator to support point above.
+- Proper logging - using structured logging and enriched context. Help with issue investigation and debugging
