@@ -32,9 +32,11 @@ You should plan to spend around 1 to 3 hours to complete the exercise.
 - Introduce simpler Result pattern on `MakePayment` method and early returns for error cases.
 - Introduce `DataStoreType` enum to remove  magic string
 - Uses moq and AutoFixture for unit tests for mocking dependencies and test data generation
+- Make Account properties be private setter and public `DeductFunds` method to update `Balance`
  
 ## Improvement
 - Implement proper Result<T> pattern on `MakePayment` method.
 - Better error handling on paymentvalidator result as it does not explain the reason for failure.
 - Introduce result pattern to payment validator to support point above.
 - Proper logging - using structured logging and enriched context. Help with issue investigation and debugging
+- Uses record to improve object immutability as it is immutable by design
