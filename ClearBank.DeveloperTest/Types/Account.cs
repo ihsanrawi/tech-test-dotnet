@@ -2,9 +2,11 @@
 {
     public class Account
     {
-        public string AccountNumber { get; set; }
-        public decimal Balance { get; set; }
-        public AccountStatus Status { get; set; }
-        public AllowedPaymentSchemes AllowedPaymentSchemes { get; set; }
+        public string AccountNumber { get; private set; }
+        public decimal Balance { get; private set; }
+        public AccountStatus Status { get; private set; }
+        public AllowedPaymentSchemes AllowedPaymentSchemes { get; private set; }
+
+        public void DeductFunds(decimal amount) => Balance -= amount;
     }
 }

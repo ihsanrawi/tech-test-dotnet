@@ -23,7 +23,9 @@ namespace ClearBank.DeveloperTest.Services
                 return new MakePaymentResult(){ ErrorMessage = "Invalid DataStoreType in configuration" };
             }
             
-            var account = RetrieveAccount(dataStoreEnum, request.DebtorAccountNumber);
+            var dataStore = dataStoreFactory.GetDataStore(dataStoreEnum);
+            
+            var account = dataStore.GetAccount(request.DebtorAccountNumber);
             if (account == null)
             {
                 return new MakePaymentResult(){ErrorMessage = "Account not found"};
@@ -39,29 +41,18 @@ namespace ClearBank.DeveloperTest.Services
                 return result;
             }
 
-            account.Balance -= request.Amount;
-            UpdateAccount(dataStoreEnum, account);
+            account.DeductFunds(request.Amount);
 
-            return result;
-        }
-        
-        private Account RetrieveAccount(DataStoreType dataStoreEnum, string debtorAccountNumber)
-        {
-            var dataStore = dataStoreFactory.GetDataStore(dataStoreEnum);
-            return dataStore.GetAccount(debtorAccountNumber);
-        }
-        
-        private void UpdateAccount(DataStoreType dataStoreEnum, Account account)
-        {
             try
             {
-                var dataStore = dataStoreFactory.GetDataStore(dataStoreEnum);
                 dataStore.UpdateAccount(account);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+
+            return result;
         }
     }
 }
