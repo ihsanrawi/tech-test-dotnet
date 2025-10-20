@@ -31,6 +31,7 @@ You should plan to spend around 1 to 3 hours to complete the exercise.
 - Improved error handling by introducing `ErrorMessage` in `MakePaymentResult` and trycatch if update account fails
 - Introduce simpler Result pattern on `MakePayment` method and early returns for error cases.
 - Introduce `DataStoreType` enum to remove  magic string
+- Uses moq and AutoFixture for unit tests for mocking dependencies and test data generation
  
 ## Improvement
 - Implement proper Result<T> pattern on `MakePayment` method.
